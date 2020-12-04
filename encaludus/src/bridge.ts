@@ -1,7 +1,6 @@
 
 import { spawn, ChildProcess } from 'child_process';
 import * as k8s from '@kubernetes/client-node';
-import * as util from 'util';
 
 const baseEnv: NodeJS.ProcessEnv = {
   BRIDGE_USER_AUTH: 'disabled',

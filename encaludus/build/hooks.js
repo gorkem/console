@@ -1,13 +1,13 @@
 const fse = require('fs-extra')
-
+const path = require('path');
 module.exports = {
 
   generateAssets: async (forgeConfig, options) => {
-    fse.copySync('../bin', './bin')
-    fse.ensureDirSync('./frontend/public/dist')
-    fse.copySync('../frontend/public/dist', './frontend/public/dist')
-    fse.ensureDirSync('./pkg/graphql')
-    fse.copySync('../pkg/graphql/schema.graphql','./pkg/graphql/schema.graphql')
+    fse.copySync(path.resolve('../bin'), path.resolve('./bin'))
+    const distPath = path.resolve('./frontend/public/dist')
+    fse.ensureDirSync(distPath)
+    fse.copySync(path.resolve('../frontend/public/dist'), distPath)
+    fse.ensureDirSync(path.resolve('./pkg/graphql'))
+    fse.copySync(path.resolve('../pkg/graphql/schema.graphql'),path.resolve('./pkg/graphql/schema.graphql'))
   }
-
 };
