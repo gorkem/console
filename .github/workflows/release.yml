@@ -41,7 +41,7 @@ jobs:
     - run: | 
           yarn install 
           yarn run build
-      working-directory: ./front-end
+      working-directory: ./frontend
     - name: Build 
       uses: actions/setup-node@v1
     - run: |
