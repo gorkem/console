@@ -7,7 +7,7 @@ on:
 jobs:
   
   build-frontend:
-    
+    name: Build console frontend
     runs-on: [ubuntu-latest]
     strategy:
       matrix:
@@ -42,7 +42,8 @@ jobs:
           path: ./frontend/public/dist
 
   build-platform:
-
+    name: Build platfrom specific packages
+    needs: [build-frontend]
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
