@@ -75,4 +75,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: ${{ matrix.os }}-distro
-        path: ./encaludus/out/make/*.zip
+        path: ./encaludus/out/make/zip/**/*.zip
