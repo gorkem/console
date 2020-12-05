@@ -71,4 +71,8 @@ jobs:
       working-directory: ./encaludus
     - run: yarn run make     
       working-directory: ./encaludus
-
+    - name: Upload zip
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ matrix.os }}-distro
+        path: ./out/make/*.zip
