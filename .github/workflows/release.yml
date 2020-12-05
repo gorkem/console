@@ -31,7 +31,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - run: yarn install 
+      - run: yarn install
+        working-directory: ./frontend
       - run: yarn run build
         working-directory: ./frontend
       - name: Upload dist
@@ -65,7 +66,9 @@ jobs:
     - name: Build 
       uses: actions/setup-node@v1
     - run: yarn install
+      working-directory: ./encaludus
     - run: yarn run compile
+      working-directory: ./encaludus
     - run: yarn run make     
       working-directory: ./encaludus
 
