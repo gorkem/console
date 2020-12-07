@@ -1,6 +1,10 @@
 
+
+import * as path from 'path';
 import { spawn, ChildProcess } from 'child_process';
 import * as k8s from '@kubernetes/client-node';
+// @ts-ignore
+import { rootPath as root } from 'electron-root-path';
 
 const baseEnv: NodeJS.ProcessEnv = {
   BRIDGE_USER_AUTH: 'disabled',
@@ -53,8 +57,11 @@ export class Bridge {
 
 
     const promise = new Promise((resolve, reject) => {
-      this.bridgeProcess = spawn('./bin/bridge', {
+
+      const execPath = path.resolve(path.join(root, './bin','./bridge'));
+      this.bridgeProcess = spawn(execPath, {
         env: currentEnv,
+        cwd: root
       });
 
       this.bridgeProcess.stdout?.on('data', (data: string) => {

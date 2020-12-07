@@ -14,10 +14,7 @@ function createWindow () {
       nodeIntegration: true
     }
   })
-
   bridge.start().then( ()=>  win.loadURL('http://localhost:9000')).catch ((error) => console.log(error));
-
-  win.webContents.openDevTools()
 }
 
 app.whenReady().then(createWindow)
