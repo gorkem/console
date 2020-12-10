@@ -3,6 +3,8 @@ name: Release Encaludus
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '0 2 * * *'
 
 jobs:
   
@@ -76,7 +78,13 @@ jobs:
     - run: yarn run make     
       working-directory: ./encaludus
     - name: Upload zip
-      uses: actions/upload-artifact@v2
+      uses: WebFreak001/deploy-nightly@v1.1.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        name: ${{ matrix.os }}-distro
-        path: ./encaludus/out/make/zip/**/*.zip
+        upload_url: https://uploads.github.com/repos/gorkem/console/releases/35117499/assets{?name,label}
+        release_id: 35117499
+        asset_path: ./encaludus/out/make/zip/**/*.zip
+        asset_name: encaludus-${{ matrix.os }}-$$.zip
+        asset_content_type: application/zip 
+        max_releases: 7 # optional, if there are more releases than this matching the asset_name, the oldest ones are going to be deleted
