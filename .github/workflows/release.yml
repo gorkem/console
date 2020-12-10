@@ -16,6 +16,7 @@ jobs:
       - name: Get Console master
         uses: actions/checkout@v2
         with:
+          repository: openshift/console
           ref: master
       - name: Cache node modules
         uses: actions/cache@v2
