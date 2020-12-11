@@ -26,6 +26,7 @@ async function createWindow () {
   }
 }
 
+app.setName("Encaludus");
 app.whenReady().then(createWindow)
 
 app.on('window-all-closed', () => {
