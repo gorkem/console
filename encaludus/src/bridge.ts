@@ -10,7 +10,8 @@ const baseEnv: NodeJS.ProcessEnv = {
   BRIDGE_USER_AUTH: 'disabled',
   BRIDGE_K8S_MODE: 'off-cluster',
   BRIDGE_K8S_AUTH: 'bearer-token',
-  BRIDGE_K8S_MODE_OFF_CLUSTER_SKIP_VERIFY_TLS: 'true'
+  BRIDGE_K8S_MODE_OFF_CLUSTER_SKIP_VERIFY_TLS: 'true',
+  BRIDGE_CUSTOM_PRODUCT_NAME: 'Encaludus'
 }
 
 export class Bridge {
@@ -33,6 +34,7 @@ export class Bridge {
       BRIDGE_K8S_MODE_OFF_CLUSTER_ALERTMANAGER: ''
     }
     const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
+
     // BRIDGE_K8S_MODE_OFF_CLUSTER_THANOS=$(oc -n openshift-config-managed get configmap monitoring-shared-config -o jsonpath='{.data.thanosPublicURL}'
     try {
       const monEndPoint = await k8sApi.readNamespacedConfigMap('monitoring-shared-config', 'openshift-config-managed');

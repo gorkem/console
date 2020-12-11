@@ -1,12 +1,13 @@
 import { app, BrowserWindow } from 'electron';
 
 import {Bridge} from './bridge';
+import {Cluster, ClusterConnectionStatus} from './cluster';
 
 
 const bridge = new Bridge();
 
 
-function createWindow () {
+async function createWindow () {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
@@ -14,7 +15,15 @@ function createWindow () {
       nodeIntegration: true
     }
   })
-  bridge.start().then( ()=>  win.loadURL('http://localhost:9000')).catch ((error) => console.log(error));
+  const cluster = new Cluster();
+  const clusterStatus = await cluster.getConnectionStatus();
+
+  if(clusterStatus === ClusterConnectionStatus.AccessGranted){
+    bridge.start().then( ()=>  win.loadURL('http://localhost:9000')).catch ((error) => console.log(error));
+  }
+  else{
+    win.loadFile('./www/no-connection.html');
+  }
 }
 
 app.whenReady().then(createWindow)
