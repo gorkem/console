@@ -30,7 +30,9 @@ export class Cluster {
           status= ClusterConnectionStatus.Offline;
         }
       }
-      Promise.reject(error)
+      else{
+        Promise.reject(error);
+      }
     }
     return status;
   }
